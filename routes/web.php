@@ -17,6 +17,8 @@ use App\Http\Controllers\TestController;
 Route::get('/', function () {
     return view('login');
 });
-Route::view('/absences', 'absences');
+Route::get('/absences', function () {
+  return view('absences');
+});
 
 Route::get('/test/{param1}/{param2}', [TestController::class, 'test']);
