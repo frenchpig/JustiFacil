@@ -6,7 +6,7 @@ const axios = require('axios');
 const apiUrl = 'http://justifacil.test'; // Reemplaza con la URL de tu aplicación Laravel
 
 // Llamada a la ruta usando axios
-axios.get(`${apiUrl}/test/123/Hola!!!`)
+axios.get(`${apiUrl}/test/Alo/Chao`)
     .then(response => {
         console.log(response.data);
     })
