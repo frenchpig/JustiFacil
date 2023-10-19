@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
-
+use App\Http\Controllers\AbsenceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +22,4 @@ Route::get('/absences', function () {
 });
 
 Route::get('/test/{param1}/{param2}', [TestController::class, 'test']);
+Route::get('/absences/{person_name}/{description}', [AbsenceController::class,'store'])->name('absences.store');
