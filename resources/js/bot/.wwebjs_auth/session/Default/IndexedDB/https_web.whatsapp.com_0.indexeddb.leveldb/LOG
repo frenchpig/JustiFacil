@@ -1,3 +1,10 @@
-2023/10/19-15:59:41.638 3920 Reusing MANIFEST C:\laragon\www\justifacil\resources\js\bot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/10/19-15:59:41.639 3920 Recovering log #269
-2023/10/19-15:59:41.722 3920 Reusing old log C:\laragon\www\justifacil\resources\js\bot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000269.log 
+2023/10/21-14:27:09.053 1b40 Reusing MANIFEST C:\laragon\www\justifacil\resources\js\bot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/10/21-14:27:09.053 1b40 Recovering log #274
+2023/10/21-14:27:09.183 1b40 Reusing old log C:\laragon\www\justifacil\resources\js\bot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000274.log 
+2023/10/21-14:30:32.366 399c Level-0 table #279: started
+2023/10/21-14:30:32.389 399c Level-0 table #279: 1415838 bytes OK
+2023/10/21-14:30:32.390 399c Delete type=0 #274
+2023/10/21-14:30:32.753 399c Compacting 1@1 + 1@2 files
+2023/10/21-14:30:32.798 399c Generated table #280@1: 24055 keys, 960450 bytes
+2023/10/21-14:30:32.798 399c Compacted 1@1 + 1@2 files => 960450 bytes
+2023/10/21-14:30:32.799 399c compacted to: files[ 0 0 1 0 0 0 0 ]
