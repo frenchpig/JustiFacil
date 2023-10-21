@@ -1,5 +1,3 @@
-2023/10/21-18:46:54.285 13d0 Reusing MANIFEST C:\laragon\www\justifacil\resources\js\bot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/10/21-18:46:54.289 13d0 Recovering log #278
-2023/10/21-18:46:54.327 13d0 Reusing old log C:\laragon\www\justifacil\resources\js\bot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000278.log 
-2023/10/21-18:46:54.327 13d0 Delete type=2 #276
-2023/10/21-18:46:54.327 13d0 Delete type=2 #279
+2023/10/21-20:05:23.347 4180 Reusing MANIFEST C:\laragon\www\justifacil\resources\js\bot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/10/21-20:05:23.347 4180 Recovering log #278
+2023/10/21-20:05:23.456 4180 Reusing old log C:\laragon\www\justifacil\resources\js\bot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000278.log 
