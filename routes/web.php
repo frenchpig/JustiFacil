@@ -17,9 +17,11 @@ use App\Http\Controllers\AbsenceController;
 
 
 Route::get('/test/{param1}/{param2}', [TestController::class, 'test']);
-Route::get('/absences/{person_name}/{description}', [AbsenceController::class,'store'])->name('absences.store');
+Route::get('/absences/{person_name}/{description}/{number}', [AbsenceController::class,'store'])->name('absences.store');
 
 Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout',[App\Http\Controllers\Auth\LogoutController::class, 'logout'])->name('custom.logout');
 Route::get('/absences',[AbsenceController::class,'index']);
+Route::get('/check-phone/{phone}', [AbsenceController::class,'checkPhoneNumberRegistered']);
+Route::get('/register-person/{name}/{phone}',[AbsenceController::class,'registerPerson']);

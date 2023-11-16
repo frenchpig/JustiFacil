@@ -41,6 +41,7 @@
                     <th scope="col">ID#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripcion</th>
+                    <th scope="col">Telefono</th>
                     <th scope="col">Dia/Hora Registrado</th>
                   </tr>
                 </thead>
@@ -50,6 +51,7 @@
                       <th scope="row">{{ $absence->id }}</th>
                       <td>{{ $absence->person_name }}</td>
                       <td>{{ $absence->description }}</td>
+                      <td>{{ '+' . substr($absence->phone, 0, 3) . ' ' . substr($absence->phone, 3, 4) . ' ' . substr($absence->phone, 7, 4) }}</td>
                       <td>{{ $absence->created_at }}</td>
                     </tr>
                   @endforeach

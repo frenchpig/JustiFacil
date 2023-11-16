@@ -31,7 +31,7 @@ client.on('authenticated', () => {
 client.initialize();
 
 //save absence in database, needed person_name and description
-function saveAbsence(p_name,desc){
+function saveAbsence(p_name,desc,number){
   //convert plain string into URIComponent, it now supports blank spaces.
   let p_nameFix=encodeURIComponent(p_name);
   let descFix=encodeURIComponent(desc);
@@ -40,7 +40,7 @@ function saveAbsence(p_name,desc){
   console.log('person name: ',p_name);
   console.log('description: ',desc);
   //Ask the server to save data on database
-  axios.get(`${apiUrl}/absences/${p_nameFix}/${descFix}`)
+  axios.get(`${apiUrl}/absences/${p_nameFix}/${descFix}/${number}`)
     .then(response => {
         console.log(response.data);
     })
@@ -49,39 +49,68 @@ function saveAbsence(p_name,desc){
     });
 }
 
-//global variables of person_name and descripcion.
-let person_name;
-let description;
+//ask DB if exist any user with the phone that is getting the message
+async function checkPhone(phone){
+  const response = await axios.get(`${apiUrl}/check-phone/${phone}`);
+  return {"found": response.data.found, "data": response.data.user};
+}
+
+//saves de user on to the database
+async function registerUser(phone, name){
+  try{
+    const response =  await axios.get(`${apiUrl}/register-person/${name}/${phone}`);
+  }
+  catch{
+
+  }
+}
+
+//Creates a random number between 5000 and 7000 for the message response time.
+function getRandomResponseTime(){
+  return Math.floor(Math.random() * (7000 - 5000 + 1)) + 5000;
+}
 
 //Client message listener
-client.on('message', message => {
-  //If messages starts with !justificar sends tutorial of usage.
-	if(message.body.startsWith("!justificar")) {
-        setTimeout(() => {
-            message.reply('Buenas!, bienvenido a justifacil, para justificar tu inasistencia del dia de hoy ingresa tu nombre con el comando !nombre y tu razon o descripcion con !descripcion');
-        }, 7000);
-	}
-  // if message starts with !nombre trims any unwanted characters and saves the full string on global variable person_name
-  if(message.body.startsWith("!nombre")) {
-        let trimmed = message.body.replace("!nombre ", "");
-        person_name=trimmed;
-        console.log("Se ha capturado un nombre! ",person_name);
-        //Sends message to user stating that name is saved
-        setTimeout(() => {
-            message.reply('Nombre Guardado!');
-        }, 7000);
-    }
-  // if message starts with !descripcion trims any unwanted characters and saves the full string on globar variable descripcion, triggering saveAbsence() funcition
-  if(message.body.startsWith("!descripcion")) {
-        let trimmed = message.body.replace("!descripcion ","");
-        description=trimmed;
-        console.log("Se ha capturado una descripcion! ",description);
-        saveAbsence(person_name,description);
-        //Sends message to user stating that the absence is saved
-        setTimeout(() => {
-            message.reply('Justificacion Guardada!');
-        }, 7000);
-    }
+client.on('message', async message => {
+  //calls a random number for a response time for the messages.
+  let responseTime=getRandomResponseTime();
+   //gets the sender information, this is used to get the phone number
+  const contact = await message.getContact();
+
+  //calls function to check if phone is on the DB
+  const dataValidation = await checkPhone(contact.number);
+
+  //if phone isnt on database and the message isnt !registrar command it sends generic message
+  if (dataValidation.found==false && !message.body.startsWith("!registrar")){
+    setTimeout(() => {
+      message.reply('Buenas! Soy JustiFacil, he notado que no te encuentras en nuestros sistemas, porfavor, registrate utilizando el comando !registrar seguido de tu nombre.');
+      }, responseTime);
+  }
+
+  //if phone isnt on database and message IS !registrar command it saves the phone number and name given in to the DB
+  if (dataValidation.found==false&&message.body.startsWith("!registrar")){
+    let trimmed = message.body.replace("!registrar","");
+    registerUser(contact.number,trimmed)
+    setTimeout(() => {
+      message.reply(`Magnifico!, te acabamos de registrar en nuestros sistemas ${trimmed}`);
+    }, responseTime);
+  }
+
+  //if phone is on DB and the message isnt !justificar command it sends a generic message only for registered users.
+  if (dataValidation.found==true && !message.body.startsWith("!justificar")){
+    setTimeout(() => {
+      message.reply(`Buenas ${dataValidation.data.name}!, si deseas justificar tu ausencia el dia de hoy no dudes en enviarme tu justificacion con el comando !justificar.`);
+      }, responseTime);
+  }
+
+  //if phone is registered on DB and the message IS !justificar command it sends the data off to the DB and saves a new absence with todays date.
+  if (dataValidation.found==true && message.body.startsWith("!justificar")){
+    let trimmed = message.body.replace("!justificar","");
+    saveAbsence(dataValidation.data.name,trimmed,contact.number);
+    setTimeout(() => {
+      message.reply(`Listo ${dataValidation.data.name}!, tu justificacion se ha registrado en nuestros sistemas.`);
+      }, responseTime);
+  }
 });
 
 

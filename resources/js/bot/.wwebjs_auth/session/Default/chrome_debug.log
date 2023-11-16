@@ -1,18 +1,4 @@
-[1021/200520.591:WARNING:backend_impl.cc(1826)] Destroying invalid entry.
-[1021/200523.058:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'ambient-light-sensor'.", source:  (0)
-[1021/200523.058:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'bluetooth'.", source:  (0)
-[1021/200523.062:ERROR:backend_impl.cc(1041)] Critical error found -8
-[1021/200523.062:ERROR:entry_impl.cc(1076)] No file for c1030322
-[1021/200523.062:WARNING:storage_block-inl.h(147)] Failed data load.
-[1021/200523.062:WARNING:storage_block-inl.h(147)] Failed data load.
-[1021/200523.062:WARNING:storage_block-inl.h(147)] Failed data load.
-[1021/200523.062:WARNING:storage_block-inl.h(147)] Failed data load.
-[1021/200523.062:ERROR:entry_impl.cc(1076)] No file for c1030320
-[1021/200523.062:WARNING:storage_block-inl.h(147)] Failed data load.
-[1021/200523.062:WARNING:storage_block-inl.h(147)] Failed data load.
-[1021/200523.062:WARNING:storage_block-inl.h(147)] Failed data load.
-[1021/200523.062:WARNING:storage_block-inl.h(147)] Failed data load.
-[1021/200523.062:ERROR:entry_impl.cc(1076)] No file for c1030324
-[1021/200523.063:WARNING:storage_block-inl.h(147)] Failed data load.
-[1021/200523.063:WARNING:storage_block-inl.h(147)] Failed data load.
-[1021/200523.063:WARNING:storage_block-inl.h(147)] Failed data load.
+[1116/171820.553:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'ambient-light-sensor'.", source:  (0)
+[1116/171820.553:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'bluetooth'.", source:  (0)
+[1116/171820.553:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'local-fonts'.", source:  (0)
+[1116/171820.553:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'window-management'.", source:  (0)

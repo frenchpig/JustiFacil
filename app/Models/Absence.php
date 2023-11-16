@@ -9,5 +9,5 @@ class Absence extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['person_name','description'];
+    protected $fillable = ['person_name','description','phone'];
 }
