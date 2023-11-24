@@ -31,9 +31,26 @@
       <div class="col">
         <h1 class="mt-2">Ausencias</h1>
         <hr class="border-top border-dark">
+        <!-- Filter -->
+        <div class="row">
+          <div class="col">
+            <form id="filter">
+              <div class="form-group">
+                <label for="statusFilter">Filtro por Estado</label>
+                <select onChange="filter(this.value)" class="form-control" id="statusFilter">
+                <option value="Todos" {{ $selectedStatus === 'Todos' ? 'selected' : '' }}>Todos</option>
+                <option value="Pendiente" {{ $selectedStatus === 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+                <option value="Aceptada" {{ $selectedStatus === 'Aceptada' ? 'selected' : '' }}>Aceptada</option>
+                <option value="Rechazada" {{ $selectedStatus === 'Rechazada' ? 'selected' : '' }}>Rechazada</option>
+                </select>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- End Filter -->
         <div class="row">
           <div class="col d-flex justify-content-center">
-            <div class="card border-dark" style="width: 100rem; height: 90vh; overflow: auto;">
+            <div class="card border-dark" style="width: 100rem; height: 80vh; overflow: auto;">
               <!-- Absences Table -->
               <table class="table">
                 <thead>
@@ -43,6 +60,8 @@
                     <th scope="col">Descripcion</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Dia/Hora Registrado</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -53,6 +72,27 @@
                       <td>{{ $absence->description }}</td>
                       <td>{{ '+' . substr($absence->phone, 0, 3) . ' ' . substr($absence->phone, 3, 4) . ' ' . substr($absence->phone, 7, 4) }}</td>
                       <td>{{ $absence->created_at }}</td>
+                      <td>{{ $absence->status }}</td>
+                      <td>
+                        @if($absence->status === 'Pendiente')
+                          <div class="row">
+                            <div class="col">
+                              <form action="{{route('absences.accept', ['id' => $absence->id])}}" method="POST">
+                              @csrf
+                              @method('PUT')
+                              <button type="submit" class="btn btn-primary"><i class="bi bi-check"></i></button>
+                              </form>
+                            </div>
+                            <div class="col">
+                              <form action="{{route('absences.reject', ['id' => $absence->id])}}" method="POST">
+                              @csrf
+                              @method('PUT')
+                              <button type="submit" class="btn btn-danger"><i class="bi bi-x"></i></button>
+                              </form>
+                            </div>
+                          </div>
+                        @endif
+                      </td>
                     </tr>
                   @endforeach
               </table>
@@ -66,16 +106,14 @@
     </div>
   </div>
 
-
-  <!-- <ul>
-    @foreach ($absences as $absence)
-
-      <li>{{ $absence->person_name }}, {{ $absence->description }}</li>
-    @endforeach
-  </ul> -->
-
 @endsection
 
 @section('scripts')
-  <script src="{{ asset('js/absences.js') }}"></script>
+<script>
+
+  console.log("hello");
+
+</script>
+<script type="text/javascript" src="{{ asset('js/absences.js') }}"></script>
+
 @endsection

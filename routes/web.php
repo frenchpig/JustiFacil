@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\AbsenceController;
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +13,6 @@ use App\Http\Controllers\AbsenceController;
 |
 */
 
-
-
-Route::get('/test/{param1}/{param2}', [TestController::class, 'test']);
 Route::get('/absences/{person_name}/{description}/{number}', [AbsenceController::class,'store'])->name('absences.store');
 
 Auth::routes();
@@ -25,3 +21,6 @@ Route::get('/logout',[App\Http\Controllers\Auth\LogoutController::class, 'logout
 Route::get('/absences',[AbsenceController::class,'index']);
 Route::get('/check-phone/{phone}', [AbsenceController::class,'checkPhoneNumberRegistered']);
 Route::get('/register-person/{name}/{phone}',[AbsenceController::class,'registerPerson']);
+Route::put('/absences/{id}/accept', [AbsenceController::class,'acceptAbsence'])->name('absences.accept');
+Route::put('/absences/{id}/reject', [AbsenceController::class, 'rejectAbsence'])->name('absences.reject');
+Route::get('/absences/filter/{status}',[AbsenceController::class, 'filterAbsences'])->name('absences.filter');

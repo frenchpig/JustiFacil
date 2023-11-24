@@ -17,9 +17,23 @@ class AbsenceController extends Controller
     $data = [
       'title' => 'Ausencias'
     ];
+    $status = 'Todos';
     //return view with all absences
-    return view('absences', $data, compact('absences'));
+    return view('absences', $data, ['absences'=>$absences,'selectedStatus'=>$status]);
   }
+
+  public function filterAbsences($status){
+    $data = [
+      'title' => 'Ausencias'
+    ];
+    if ($status && $status !== 'Todos'){
+      $absences = Absence::where('status',$status)->get();
+      return view('absences', $data, ['absences'=>$absences,'selectedStatus'=>$status]);
+    }else{
+      return redirect()->route('home');
+    }
+  }
+
 
   //Save on DB function
   public function store($person_name, $description,$phone){
@@ -56,6 +70,32 @@ class AbsenceController extends Controller
     $person->save();
 
     return ['status'=>true];
+  }
+
+  public function acceptAbsence($id) {
+    //returns absence by id
+    $absence = Absence::find($id);
+
+    //checks if absence was found
+    if ($absence) {
+      //changes status to Aceptada and saves.
+      $absence->status= 'Aceptada';
+      $absence->save();
+    }
+    return redirect()->back();
+  }
+
+  public function rejectAbsence($id) {
+    //gets absence
+    $absence = Absence::find($id);
+
+    //if absence found
+    if ($absence) {
+      //reject
+      $absence->status = 'Rechazada';
+      $absence->save();
+    }
+    return redirect()->back();
   }
 
 
